@@ -1,0 +1,6 @@
+{
+  "name": "working-agreement",
+  "version": "0.1.0",
+  "description": "Injects engineering working-agreement rules into every session",
+  "author": { "name": "Denis Mikhailov" }
+}

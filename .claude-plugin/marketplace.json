@@ -1,0 +1,11 @@
+{
+  "name": "notxcain",
+  "owner": { "name": "Denis Mikhailov" },
+  "plugins": [
+    {
+      "name": "working-agreement",
+      "source": "./plugins/working-agreement",
+      "description": "Injects engineering working-agreement rules into every session"
+    }
+  ]
+}
