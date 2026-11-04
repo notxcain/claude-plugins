@@ -1,0 +1,7 @@
+{
+  "name": "backend-code-structure",
+  "version": "0.2.0",
+  "description": "Vertical slice extraction: one handler per use case, queries apart from commands, and the code smells to refactor after",
+  "author": { "name": "Denis Mikhailov" },
+  "dependencies": [{ "name": "test-design", "version": "0.2.0" }]
+}

@@ -16,6 +16,11 @@
       "name": "spec-driven",
       "source": "./plugins/spec-driven",
       "description": "Requirements, design doc and ADR skills, the change-scaffolding workflow, ADR hooks and a scaffolding gate for CI"
+    },
+    {
+      "name": "backend-code-structure",
+      "source": "./plugins/backend-code-structure",
+      "description": "Vertical slice extraction: one handler per use case, queries apart from commands, and the code smells to refactor after"
     }
   ]
 }
