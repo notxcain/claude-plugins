@@ -44,7 +44,7 @@ export function checkSkills(root: string): string[] {
     for (const skill of dirs(join(root, "plugins", plugin, "skills"))) {
       const skillDir = join(root, "plugins", plugin, "skills", skill);
       const skillFile = join(skillDir, "SKILL.md");
-      const rel = (f: string) => relative(join(root, "plugins", plugin), f);
+      const rel = (f: string) => relative(root, f);
 
       if (existsSync(skillFile)) {
         const lines = readFileSync(skillFile, "utf8").trimEnd().split("\n");

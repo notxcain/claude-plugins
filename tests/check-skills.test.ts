@@ -11,13 +11,13 @@ describe("check-skills", () => {
   });
 
   test("should_fail_when_the_extension_line_names_another_skill", () => {
-    expect(problems("skills-wrong-line")).toContain("skills/a/SKILL.md: last line must be");
+    expect(problems("skills-wrong-line")).toContain("plugins/spec-driven/skills/a/SKILL.md: last line must be");
   });
 
   test("should_fail_when_a_general_plugin_has_a_typescript_fence", () => {
     const out = problems("skills-ts-general");
-    expect(out).toContain("skills/a/SKILL.md:");
-    expect(out).toContain("ts");
+    expect(out).toContain("plugins/spec-driven/skills/a/SKILL.md:");
+    expect(out).toContain('code fence "ts"');
   });
 
   test("should_allow_a_typescript_fence_in_a_stack_plugin", () => {
