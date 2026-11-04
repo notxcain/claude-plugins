@@ -6,6 +6,11 @@
       "name": "working-agreement",
       "source": "./plugins/working-agreement",
       "description": "Injects engineering working-agreement rules into every session"
+    },
+    {
+      "name": "test-design",
+      "source": "./plugins/test-design",
+      "description": "How to size, scope and double tests, and how to write end-to-end UI tests"
     }
   ]
 }
