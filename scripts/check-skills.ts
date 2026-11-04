@@ -18,6 +18,13 @@ const PROJECT_TERMS: [string, RegExp][] = [
   ["bun run", /\bbun run\b/],
 ];
 
+// Naming conventions a codebase could reasonably reject. A project states them in its extension.
+const CONTESTED_NAMING: [string, RegExp][] = [
+  ["should_ test titles", /['"`]should_\w/],
+  ["Fake* prefix", /\bFake[A-Z]\w*/],
+  ["Default* prefix", /\bDefault[A-Z]\w*(Repository|Service|Client|Handler)\b/],
+];
+
 const extensionLine = (plugin: string, skill: string) =>
   `Project additions: if \`.claude/extensions/${plugin}/${skill}.md\` exists in the project, read it now and follow it as part of this skill.`;
 
@@ -65,6 +72,9 @@ export function checkSkills(root: string): string[] {
         }
         for (const [name, re] of PROJECT_TERMS) {
           if (re.test(text)) out.push(`${rel(file)}: names the project term "${name}"`);
+        }
+        for (const [name, re] of CONTESTED_NAMING) {
+          if (re.test(text)) out.push(`${rel(file)}: uses the contested naming "${name}"`);
         }
       }
     }

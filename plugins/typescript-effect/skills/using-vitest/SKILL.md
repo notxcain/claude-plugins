@@ -12,7 +12,7 @@ Vitest forms of the rules in `test-design:designing-tests`.
 Inject a fake through the constructor. Do not use `vi.mock`, `vi.mocked` or `vi.spyOn` to replace a dependency.
 
 ```typescript
-const fakeRepo = new FakeProductRepository();
+const fakeRepo = new InMemoryProductRepository();
 fakeRepo.seed(product);
 const service = new ProductService(fakeRepo);
 ```
@@ -23,7 +23,7 @@ Build the subject inside the test, or with a fixture factory. Do not share a mut
 
 ```typescript
 function createFixture(options: {} = {}) {
-  const repo = new FakeRepo();
+  const repo = new InMemoryRepo();
   return { service: new MyService(repo), repo };
 }
 test('example', () => {

@@ -29,6 +29,13 @@ describe("check-skills", () => {
     expect(problems("skills-term-bun")).toContain("bun run");
   });
 
+  test("should_fail_when_a_skill_uses_a_contested_naming_convention", () => {
+    const out = problems("skills-contested");
+    expect(out).toContain('plugins/typescript-effect/skills/a/references/patterns.md: uses the contested naming "should_ test titles"');
+    expect(out).toContain('plugins/typescript-effect/skills/a/references/patterns.md: uses the contested naming "Fake* prefix"');
+    expect(out).toContain('plugins/typescript-effect/skills/a/references/patterns.md: uses the contested naming "Default* prefix"');
+  });
+
   test("should_not_flag_github_as_a_project_term", () => {
     expect(checkSkills(fixture("skills-term-github"))).toEqual([]);
   });

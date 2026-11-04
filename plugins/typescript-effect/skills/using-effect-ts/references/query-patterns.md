@@ -196,7 +196,7 @@ describe("ListOrdersQueryHandler Integration Tests", () => {
     await db.delete(customer)
   })
 
-  it.effect("should_return_orders_for_customer", () =>
+  it.effect("returns the orders of a customer", () =>
     Effect.gen(function* () {
       const handler = new ListOrdersQueryHandler(getDb())
 
@@ -217,7 +217,7 @@ describe("ListOrdersQueryHandler Integration Tests", () => {
     })
   )
 
-  it.effect("should_return_empty_array_when_no_orders", () =>
+  it.effect("returns an empty array when there are no orders", () =>
     Effect.gen(function* () {
       const handler = new ListOrdersQueryHandler(getDb())
 

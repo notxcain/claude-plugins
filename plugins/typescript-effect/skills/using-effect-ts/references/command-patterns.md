@@ -207,20 +207,20 @@ Use fake repositories for fast, focused unit tests:
 // handler.test.ts
 import { describe, expect, it } from "vitest"
 import { CreateOrderCommand, CreateOrderCommandHandler, CustomerNotFound, InsufficientStock } from "./handler.ts"
-import { FakeCustomerRepository } from "../shared/fake-customer-repository.ts"
-import { FakeProductRepository } from "../shared/fake-product-repository.ts"
-import { FakeOrderRepository } from "../shared/fake-order-repository.ts"
+import { InMemoryCustomerRepository } from "../shared/in-memory-customer-repository.ts"
+import { InMemoryProductRepository } from "../shared/in-memory-product-repository.ts"
+import { InMemoryOrderRepository } from "../shared/in-memory-order-repository.ts"
 
 function createTestContext() {
-  const customerRepo = new FakeCustomerRepository()
-  const productRepo = new FakeProductRepository()
-  const orderRepo = new FakeOrderRepository()
+  const customerRepo = new InMemoryCustomerRepository()
+  const productRepo = new InMemoryProductRepository()
+  const orderRepo = new InMemoryOrderRepository()
   const handler = new CreateOrderCommandHandler(customerRepo, productRepo, orderRepo)
   return { customerRepo, productRepo, orderRepo, handler }
 }
 
 describe("CreateOrderCommandHandler", () => {
-  it.effect("should_create_order_successfully", () =>
+  it.effect("creates an order", () =>
     Effect.gen(function* () {
       const { customerRepo, productRepo, handler } = createTestContext()
 
@@ -240,7 +240,7 @@ describe("CreateOrderCommandHandler", () => {
     })
   )
 
-  it.effect("should_fail_when_customer_not_found", () =>
+  it.effect("fails when the customer is not found", () =>
     Effect.gen(function* () {
       const { handler } = createTestContext()
 
@@ -253,7 +253,7 @@ describe("CreateOrderCommandHandler", () => {
     })
   )
 
-  it.effect("should_fail_when_insufficient_stock", () =>
+  it.effect("fails when stock is insufficient", () =>
     Effect.gen(function* () {
       const { customerRepo, productRepo, handler } = createTestContext()
 
@@ -279,10 +279,10 @@ describe("CreateOrderCommandHandler", () => {
 ### Fake Repository Pattern
 
 ```typescript
-// shared/fake-customer-repository.ts
+// shared/in-memory-customer-repository.ts
 import type { CustomerRepository, Customer } from "./customer-repository.ts"
 
-export class FakeCustomerRepository implements CustomerRepository {
+export class InMemoryCustomerRepository implements CustomerRepository {
   private customers = new Map<string, Customer>()
 
   insert(customer: Customer): Effect.Effect<void> {

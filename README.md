@@ -2,14 +2,16 @@
 
 ```
 /plugin marketplace add notxcain/claude-plugins
-/plugin install working-agreement@notxcain
+/plugin install <plugin>@notxcain
 ```
 
 ## Plugins
 
 - `working-agreement` — injects `plugins/working-agreement/rules.md` at session start.
-
-More plugins (`spec-driven`, `test-design`, `backend-code-structure`, `typescript-effect`) arrive in later releases.
+- `spec-driven` — Requirements → Software Design → Plan, change scaffolding, the spec, design doc, ADR and spec-coverage skills, ADR hooks, and a scaffolding gate for CI. Depends on `test-design`.
+- `test-design` — test sizes, test doubles, state assertions, and end-to-end UI tests.
+- `backend-code-structure` — vertical slice extraction. Depends on `test-design`.
+- `typescript-effect` — Effect TS and Vitest forms of the general plugins. Depends on `test-design` and `backend-code-structure`.
 
 ## Versions
 
@@ -64,6 +66,6 @@ handler GetOrder(db: Database)
 ## Checks
 
 - `bun test` runs the tests of the checks below.
-- `bun scripts/check-skills.ts [root]` checks each `SKILL.md` and `references/*.md`: the last line, no stack code fence in a general plugin, and no project term (BrandHub, `hub`, `backoffice`, `@common/`, `@util/`, `@domains/`, `@apps/`, `modules/`, `bun run`). It prints one `path: problem` line per problem and exits 1 on any.
+- `bun scripts/check-skills.ts [root]` checks each `SKILL.md` and `references/*.md`: the last line, no stack code fence in a general plugin, no project term (BrandHub, `hub`, `backoffice`, `@common/`, `@util/`, `@domains/`, `@apps/`, `modules/`, `bun run`), and no contested naming (`should_` test titles, `Fake*` and `Default*` prefixes). It prints one `path: problem` line per problem and exits 1 on any.
 - `claude plugin validate` runs in CI for the marketplace and for each plugin. It needs no login.
 - Evals (`claude plugin eval plugins/<p>`, cases in `plugins/<p>/evals/`) run in CI for a changed plugin, when the repository has the `ANTHROPIC_API_KEY` secret.
