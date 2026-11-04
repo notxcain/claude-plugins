@@ -1,0 +1,10 @@
+{
+  "name": "typescript-effect",
+  "version": "0.2.0",
+  "description": "Effect TS handlers, errors, repositories and tests, Vitest with fakes, and the Effect forms of the vertical slice patterns",
+  "author": { "name": "Denis Mikhailov" },
+  "dependencies": [
+    { "name": "test-design", "version": "0.2.0" },
+    { "name": "backend-code-structure", "version": "0.2.0" }
+  ]
+}
