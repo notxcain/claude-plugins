@@ -1,0 +1,13 @@
+{
+  "name": "claude-plugins",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "check": "bun scripts/check-skills.ts && bun scripts/check-versions.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "typescript": "^7.0.2"
+  }
+}

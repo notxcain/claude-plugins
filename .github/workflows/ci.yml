@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun test
+      - run: bun scripts/check-skills.ts
+      - run: bun scripts/check-versions.ts
+      - name: Validate the marketplace and each plugin
+        run: |
+          bunx @anthropic-ai/claude-code plugin validate .
+          for dir in plugins/*/; do
+            bunx @anthropic-ai/claude-code plugin validate "${dir%/}"
+          done
+
+  evals:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        if: ${{ env.ANTHROPIC_API_KEY != '' }}
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        if: ${{ env.ANTHROPIC_API_KEY != '' }}
+      # Runs `claude plugin eval` for each plugin that changed in the diff and has
+      # an evals/ directory (<plugin>/evals/**/case.yaml, or prompt.md + graders/*.md).
+      # With no changed plugin, or no secret, it passes without running anything.
+      - name: Evaluate changed plugins
+        if: ${{ env.ANTHROPIC_API_KEY != '' }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+          case "$base" in ""|0000000000000000000000000000000000000000) range="HEAD~1" ;; *) range="$base" ;; esac
+          changed=$(git diff --name-only "$range" HEAD -- plugins 2>/dev/null | cut -d/ -f2 | sort -u || true)
+          for p in $changed; do
+            if [ -d "plugins/$p/evals" ]; then
+              bunx @anthropic-ai/claude-code plugin eval "plugins/$p" --trust-plugin
+            fi
+          done

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'cat \"$CLAUDE_PLUGIN_ROOT/session.md\" 2>/dev/null; cat \"${CLAUDE_PROJECT_DIR:-.}/.claude/extensions/spec-driven/session.md\" 2>/dev/null; exit 0'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/adr-brainstorm-prime.sh" }]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/adr-commit-signal.sh" }]
+      }
+    ]
+  }
+}

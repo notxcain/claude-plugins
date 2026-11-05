@@ -1,0 +1,3 @@
+{ "name": "m", "owner": { "name": "o" }, "plugins": [
+  { "name": "p", "source": "./plugins/p" },
+  { "name": "q", "source": "./plugins/q" } ] }

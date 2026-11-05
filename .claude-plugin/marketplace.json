@@ -6,6 +6,26 @@
       "name": "working-agreement",
       "source": "./plugins/working-agreement",
       "description": "Injects engineering working-agreement rules into every session"
+    },
+    {
+      "name": "test-design",
+      "source": "./plugins/test-design",
+      "description": "How to size, scope and double tests, and how to write end-to-end UI tests"
+    },
+    {
+      "name": "spec-driven",
+      "source": "./plugins/spec-driven",
+      "description": "Requirements, design doc and ADR skills, the change-scaffolding workflow, ADR hooks and a scaffolding gate for CI"
+    },
+    {
+      "name": "backend-code-structure",
+      "source": "./plugins/backend-code-structure",
+      "description": "Vertical slice extraction: one handler per use case, queries apart from commands, and the code smells to refactor after"
+    },
+    {
+      "name": "typescript-effect",
+      "source": "./plugins/typescript-effect",
+      "description": "Effect TS handlers, errors, repositories and tests, Vitest with fakes, and the Effect forms of the vertical slice patterns"
     }
   ]
 }

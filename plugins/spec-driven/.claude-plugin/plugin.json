@@ -1,0 +1,7 @@
+{
+  "name": "spec-driven",
+  "version": "0.2.0",
+  "description": "Requirements, design doc and ADR skills, the change-scaffolding workflow, ADR hooks and a scaffolding gate for CI",
+  "author": { "name": "Denis Mikhailov" },
+  "dependencies": [{ "name": "test-design", "version": "0.2.0" }]
+}

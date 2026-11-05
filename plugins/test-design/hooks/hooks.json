@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'cat \"$CLAUDE_PLUGIN_ROOT/session.md\" 2>/dev/null; cat \"${CLAUDE_PROJECT_DIR:-.}/.claude/extensions/test-design/session.md\" 2>/dev/null; exit 0'"
+          }
+        ]
+      }
+    ]
+  }
+}
