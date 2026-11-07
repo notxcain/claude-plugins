@@ -36,7 +36,7 @@ The operator is usually a product manager, not an engineer, so the terminal and 
 
 2. **Settle the goal.** Ask until it is settled: a spec built on the wrong problem invalidates everything under it. Write the problem, the persona, a success measure (an unmeasured baseline is `[NEEDS CLARIFICATION]`, never an estimate), and the scope: what is in, what is out, and what must not change. Ask for anti-goals too: what would make this a failure even if it technically works. Each anti-goal becomes an invariant in the model. This is the only prose section.
    - Play back the process the feature lives in, as fact the operator corrects: each actor, the tool they work in, where each artifact lives, and which steps a check enforces and which people agree on. A finding built on a wrong picture of the process wastes a round.
-   - Ask for the operator's principles: up to 5 sentences in their words that decide many cases at once, such as "nothing blocks, everything only informs". Number them P1, P2… and put them in the scope.
+   - Every spec starts with the default principles in [references/principles.md](references/principles.md). Ask the operator whether any of them does not apply, and for up to 5 principles of this feature in their words, such as "nothing blocks, everything only informs". Number those P1, P2… and put them in the scope.
 
 3. **Draft the rules and play them back in chunks.** Write each rule as one row, `When <actor> <does>` → `Then <outcome>`, with an ID (R1, R2…). Add invariants: statements that hold in every state. Play the rules back one area at a time, in about 200–300 words, then return to questions. Mark each rule as **you said** or **my guess**. A guess becomes a rule only once the operator confirms it, and approval covers only what you showed them.
 
@@ -45,7 +45,7 @@ The operator is usually a product manager, not an engineer, so the terminal and 
 5. **Explore.** Run the checker to a stated bound. Collect invariant breaks, every `UNDECIDED` branch it reaches, and every case where two rules conflict. Keep the shortest trace to each.
 
 6. **Sort the findings into three piles:**
-   - **Settled:** a rule, a decision or a principle decides it, or an earlier decision with the same reason does (a precedent), and the outcome is unsurprising. It becomes an example that cites what settled it.
+   - **Settled:** a rule, a decision or a principle (H1–H10, A1–A3, P1…) decides it, or an earlier decision with the same reason does (a precedent), and the outcome is unsurprising. It becomes an example that cites what settled it.
    - **My call:** none of the cases under *Theirs* holds. Decide it, and record it under *My calls* with a one-line reason, so the operator can veto it.
    - **Theirs:** the answer changes the goal, the scope or an anti-goal, it is hard to reverse, or two principles conflict. It becomes a question.
 
