@@ -24,7 +24,7 @@ The operator is usually a product manager, not an engineer, so the terminal and 
 - Where the operator does not know an answer, write `[NEEDS CLARIFICATION: <question>]` and carry it into the open decisions. Never pick a value silently.
 - Where the operator says they do not care, move the point to *Left to the builder* and never ask it again.
 - Propose no mechanism, such as a list, a gate, a check or a new kind of mark, unless it prevents a failure the operator named.
-- When the rules pass 20, or one session's questions pass 8, stop asking. Propose what to cut, split or leave to the builder.
+- When one session's questions pass 8, stop asking. Propose what to cut, split or leave to the builder.
 
 ## Workflow
 
@@ -38,7 +38,7 @@ The operator is usually a product manager, not an engineer, so the terminal and 
    - Play back the process the feature lives in, as fact the operator corrects: each actor, the tool they work in, where each artifact lives, and which steps a check enforces and which people agree on. A finding built on a wrong picture of the process wastes a round.
    - Every spec starts with the default principles in [references/principles.md](references/principles.md). Ask the operator whether any of them does not apply, and for up to 5 principles of this feature in their words, such as "nothing blocks, everything only informs". Number those P1, P2… and put them in the scope.
 
-3. **Draft the rules and play them back in chunks.** Write each rule as one row, `When <actor> <does>` → `Then <outcome>`, with an ID (R1, R2…). Add invariants: statements that hold in every state. Play the rules back one area at a time, in about 200–300 words, then return to questions. Mark each rule as **you said** or **my guess**. A guess becomes a rule only once the operator confirms it, and approval covers only what you showed them.
+3. **Draft the rules and play them back in chunks.** First agree an outline with the operator: 3 to 6 areas, each one step of the journey, by who acts and in the order they act. Each rule's ID names its area (UP1, UP2… for upload). Then write each rule as one row, `When <actor> <does>` → `Then <outcome>`, with an ID (R1, R2…). Add invariants: statements that hold in every state. Play the rules back one area at a time, in about 200–300 words, then return to questions. Mark each rule as **you said** or **my guess**. A guess becomes a rule only once the operator confirms it, and approval covers only what you showed them.
 
 4. **Write the model.** First fill the writer inventory and the platform inventory in `baseline.md`, as [references/baseline.md](references/baseline.md) says. Then follow [references/model.md](references/model.md). Every branch cites the rule it encodes. A branch that no rule decides cites `UNDECIDED`, never a guess.
 
@@ -62,6 +62,15 @@ The operator is usually a product manager, not an engineer, so the terminal and 
 12. **Run the review quiz** with the operator, following *Review quiz*.
 
 13. **Run the quality gate**, write the files, and hand the spec over with the list of *My calls*, so the operator can veto any of them.
+
+## Keeping the spec small and organized
+
+- In each area, write the core rules first: the path that works, at most about 6. The rest are the area's edge rules.
+- Never write a principle as a rule. A finding a principle settles becomes an example that cites it.
+- Merge rules that differ only in their object, such as "the relation was removed" and "the node was deleted", into one rule about the general case.
+- Give a rule whose reason is not obvious a short "because" in its own row.
+- The spec's decision table holds only rejected alternatives and decisions that no rule states. The full log stays in the state file.
+- Past about 25 core rules or 250 lines, propose to split the spec along an area boundary.
 
 ## Exploring options
 
@@ -145,6 +154,7 @@ This applies to every subsystem the feature reads or changes, not only to the fe
 - [ ] No UNDECIDED branch is reachable within the bound, unless it is listed as an open decision
 - [ ] Each of your choices is listed under My calls or marked as a proposal; only the operator's answers are recorded as decisions
 - [ ] Each settled finding cites the rule, decision, principle or precedent that settled it; no question asked was one of these
+- [ ] Rules are grouped by journey area, core before edge; no rule restates a principle, and no decision in the spec restates a rule
 - [ ] Every example outcome came from a model run, and reads as a change in product words: no model identifiers, no notation, no unaffected people
 - [ ] The builder check ran, and its "theirs" pile is answered or listed as open
 - [ ] The review quiz ran, its log sits beside the state file, and each finding is in the state file

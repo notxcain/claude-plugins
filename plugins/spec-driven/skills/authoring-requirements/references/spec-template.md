@@ -30,9 +30,19 @@ Assemble the reviewable document with this structure. Sections 1 and 2 come from
 
 [Invariants, one sentence each.]
 
+<!-- One section per area of the journey, in the order people act. -->
+
+### [Area: one step of the journey]
+
 | | When… | Then |
 |---|---|---|
-| R1 | [actor] [does] | [outcome] |
+| UP1 | [actor] [does] | [outcome], because [reason, only when it is not obvious] |
+
+#### Edge cases
+
+| | When… | Then |
+|---|---|---|
+| UP7 | [actor] [does] | [outcome] |
 
 ### What exists today
 
@@ -95,9 +105,11 @@ What should happen?
 
 ### Decided
 
+<!-- Only rejected alternatives, and decisions no rule states. The full log is in the state file. -->
+
 | | Decision | By | Why |
 |---|---|---|---|
-| D1 | [decision] | [operator or designer] | [one-line reason] |
+| D1 | [decision, or the alternative rejected] | [operator or designer] | [one-line reason] |
 
 ### My calls
 
