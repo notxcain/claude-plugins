@@ -23,15 +23,26 @@ Assemble the reviewable document with this structure. Sections 1 and 2 come from
 **Out:** […]
 **Must not change:** [Existing behaviour this change touches and must preserve]
 **Anti-goals:** [What would make this a failure even if it works. Each one is an invariant in section 3.]
+**Principles:** [The defaults H1–H10 and A1–A3 apply, except: [any the operator set aside, and why]. This feature's own: P1, P2…, in the operator's words.]
 **Left to the builder:** [What this spec deliberately does not decide]
 
 ## 3. Rules
 
 [Invariants, one sentence each.]
 
+<!-- One section per area of the journey, in the order people act. -->
+
+### [Area: one step of the journey]
+
 | | When… | Then |
 |---|---|---|
-| R1 | [actor] [does] | [outcome] |
+| UP1 | [actor] [does] | [outcome], because [reason, only when it is not obvious] |
+
+#### Edge cases
+
+| | When… | Then |
+|---|---|---|
+| UP7 | [actor] [does] | [outcome] |
 
 ### What exists today
 
@@ -94,9 +105,11 @@ What should happen?
 
 ### Decided
 
+<!-- Only rejected alternatives, and decisions no rule states. The full log is in the state file. -->
+
 | | Decision | By | Why |
 |---|---|---|---|
-| D1 | [decision] | [operator or designer] | [one-line reason] |
+| D1 | [decision, or the alternative rejected] | [operator or designer] | [one-line reason] |
 
 ### My calls
 
