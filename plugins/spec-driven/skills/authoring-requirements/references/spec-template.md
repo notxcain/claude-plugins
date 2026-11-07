@@ -23,6 +23,7 @@ Assemble the reviewable document with this structure. Sections 1 and 2 come from
 **Out:** […]
 **Must not change:** [Existing behaviour this change touches and must preserve]
 **Anti-goals:** [What would make this a failure even if it works. Each one is an invariant in section 3.]
+**Principles:** [P1, P2…: the operator's principles, in their words. Each finding they settle cites them.]
 **Left to the builder:** [What this spec deliberately does not decide]
 
 ## 3. Rules

@@ -22,6 +22,9 @@ The operator is usually a product manager, not an engineer, so the terminal and 
 - Use `AskUserQuestion` only for closed decisions: approving a playback, or choosing between the options of a finding. Never use it to gather information, because invented options anchor the operator.
 - The `AskUserQuestion` dialog hides the text sent before it. Print what the operator decides on inside the dialog: a short playback in the question, a long one, such as a baseline table, in the `preview` of the approving option.
 - Where the operator does not know an answer, write `[NEEDS CLARIFICATION: <question>]` and carry it into the open decisions. Never pick a value silently.
+- Where the operator says they do not care, move the point to *Left to the builder* and never ask it again.
+- Propose no mechanism, such as a list, a gate, a check or a new kind of mark, unless it prevents a failure the operator named.
+- When the rules pass 20, or one session's questions pass 8, stop asking. Propose what to cut, split or leave to the builder.
 
 ## Workflow
 
@@ -32,6 +35,8 @@ The operator is usually a product manager, not an engineer, so the terminal and 
    - If the work grows, say so and step up to the full workflow. If it is several independent features, say so, agree an order with the operator, and spec them one at a time.
 
 2. **Settle the goal.** Ask until it is settled: a spec built on the wrong problem invalidates everything under it. Write the problem, the persona, a success measure (an unmeasured baseline is `[NEEDS CLARIFICATION]`, never an estimate), and the scope: what is in, what is out, and what must not change. Ask for anti-goals too: what would make this a failure even if it technically works. Each anti-goal becomes an invariant in the model. This is the only prose section.
+   - Play back the process the feature lives in, as fact the operator corrects: each actor, the tool they work in, where each artifact lives, and which steps a check enforces and which people agree on. A finding built on a wrong picture of the process wastes a round.
+   - Ask for the operator's principles: up to 5 sentences in their words that decide many cases at once, such as "nothing blocks, everything only informs". Number them P1, P2… and put them in the scope.
 
 3. **Draft the rules and play them back in chunks.** Write each rule as one row, `When <actor> <does>` → `Then <outcome>`, with an ID (R1, R2…). Add invariants: statements that hold in every state. Play the rules back one area at a time, in about 200–300 words, then return to questions. Mark each rule as **you said** or **my guess**. A guess becomes a rule only once the operator confirms it, and approval covers only what you showed them.
 
@@ -40,9 +45,9 @@ The operator is usually a product manager, not an engineer, so the terminal and 
 5. **Explore.** Run the checker to a stated bound. Collect invariant breaks, every `UNDECIDED` branch it reaches, and every case where two rules conflict. Keep the shortest trace to each.
 
 6. **Sort the findings into three piles:**
-   - **Settled:** an existing rule decides it, and the outcome is unsurprising. It becomes an example.
-   - **My call:** a sensible builder would decide it the same way, and the choice doesn't change what gets built. Decide it, and record it under *My calls* with a one-line reason. A choice a user would notice, such as what is refused or what they see, is never a call: it is theirs.
-   - **Theirs:** only the operator can decide it, and the answer changes what gets built. It becomes a question.
+   - **Settled:** a rule, a decision or a principle decides it, or an earlier decision with the same reason does (a precedent), and the outcome is unsurprising. It becomes an example that cites what settled it.
+   - **My call:** none of the cases under *Theirs* holds. Decide it, and record it under *My calls* with a one-line reason, so the operator can veto it.
+   - **Theirs:** the answer changes the goal, the scope or an anti-goal, it is hard to reverse, or two principles conflict. It becomes a question.
 
 7. **Ask the "theirs" pile**, most important first. Write each question as numbered steps a person can follow, then "what should happen?", then options that always include "something else". Check each option against the platform inventory: drop an option no mechanism can hold, or name the platform change it needs. Get the operator's answer *before* you show your proposal. Each answer becomes a rule, or a decision (D1, D2…) with a one-line reason, and the finding's trace becomes a scenario.
 
@@ -118,6 +123,7 @@ This applies to every subsystem the feature reads or changes, not only to the fe
 - Model each confirmation the user sees as two actions, *show* and then *confirm*, with other actors free to act in between. A count or preview shown in a dialog can be stale by the time it is confirmed.
 - Model undo as an action of its own that captures state when it is offered. That makes "undo after someone else's change" and "undo after the old value was deleted" reachable.
 - Seed actions from these edge-case dimensions: zero state, duplicates (an actor brings in something that already exists: the same file, the same name, the same request twice), failure, the boundary at a limit, concurrency, missing permission, and recovery.
+- Assume people follow the process norms the operator states, such as "no one confirms while work is still moving". List a trace that needs someone to break a norm under *Not covered*, never as a question, unless the operator says that risk matters.
 - To reach a branch the code handles but no real path seems to take, add an action flagged `HYPOTHETICAL`. Report what it reaches as "if reachable", and ask engineering whether any path can reach it.
 
 ## Keeping rules free of design and implementation
@@ -138,6 +144,7 @@ This applies to every subsystem the feature reads or changes, not only to the fe
 - [ ] Each question asked has, in the state file, what was searched in the code before it was asked
 - [ ] No UNDECIDED branch is reachable within the bound, unless it is listed as an open decision
 - [ ] Each of your choices is listed under My calls or marked as a proposal; only the operator's answers are recorded as decisions
+- [ ] Each settled finding cites the rule, decision, principle or precedent that settled it; no question asked was one of these
 - [ ] Every example outcome came from a model run, and reads as a change in product words: no model identifiers, no notation, no unaffected people
 - [ ] The builder check ran, and its "theirs" pile is answered or listed as open
 - [ ] The review quiz ran, its log sits beside the state file, and each finding is in the state file
